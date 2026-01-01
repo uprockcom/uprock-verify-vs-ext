@@ -1,0 +1,251 @@
+{
+  "name": "uprock-verify",
+  "displayName": "UpRock Verify",
+  "description": "Verify website deployments directly from your IDE (VS Code & Windsurf) - check reachability and performance across 6 continents. Includes MCP server for AI assistant integration (Claude, Windsurf Cascade).",
+  "version": "1.0.2",
+  "publisher": "uprock",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uprock/uprock-verify-vscode"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Testing"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "keywords": [
+    "verify",
+    "deployment",
+    "performance",
+    "web vitals",
+    "uptime",
+    "monitoring",
+    "windsurf",
+    "codeium"
+  ],
+  "icon": "resources/icon.png",
+  "galleryBanner": {
+    "color": "#1e293b",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "bin": {
+    "uprock-verify-mcp": "./src/mcp/index.js"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "uprockVerify",
+          "title": "UpRock Verify",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "uprockVerify": [
+        {
+          "type": "webview",
+          "id": "uprockVerify.sidebar",
+          "name": "UpRock Verify"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "uprock.verify",
+        "title": "Verify URL (Global)",
+        "category": "UpRock Verify",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "uprock.verifyDev",
+        "title": "Quick Dev Check",
+        "category": "UpRock Verify",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "uprock.verifyCurrentFile",
+        "title": "Verify URL from Selection",
+        "category": "UpRock Verify",
+        "icon": "$(link)"
+      },
+      {
+        "command": "uprock.batch",
+        "title": "Batch Verify URLs",
+        "category": "UpRock Verify",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "uprock.batchFromFile",
+        "title": "Batch Verify from File",
+        "category": "UpRock Verify",
+        "icon": "$(file)"
+      },
+      {
+        "command": "uprock.status",
+        "title": "Account Status",
+        "category": "UpRock Verify",
+        "icon": "$(account)"
+      },
+      {
+        "command": "uprock.list",
+        "title": "Recent Scans",
+        "category": "UpRock Verify",
+        "icon": "$(history)"
+      },
+      {
+        "command": "uprock.setApiKey",
+        "title": "Set API Key",
+        "category": "UpRock Verify",
+        "icon": "$(key)"
+      },
+      {
+        "command": "uprock.clearApiKey",
+        "title": "Clear API Key",
+        "category": "UpRock Verify",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "uprock.openSettings",
+        "title": "Open Settings",
+        "category": "UpRock Verify",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "uprock.history",
+        "title": "Scan History (with Filters)",
+        "category": "UpRock Verify",
+        "icon": "$(filter)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "uprock.verifyCurrentFile",
+          "group": "uprock@1",
+          "when": "editorHasSelection || editorTextFocus"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "uprock.verify",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.verifyDev",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.verifyCurrentFile",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.batch",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.batchFromFile",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.status",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.list",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.setApiKey",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.openSettings",
+          "group": "uprock"
+        },
+        {
+          "command": "uprock.history",
+          "group": "uprock"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "UpRock Verify",
+      "properties": {
+        "uprockVerify.apiBaseUrl": {
+          "type": "string",
+          "default": "https://768q7f2qhge7.share.zrok.io",
+          "description": "Base URL for the UpRock Verify API"
+        },
+        "uprockVerify.defaultRegion": {
+          "type": "string",
+          "default": "NA",
+          "enum": ["NA", "EU", "AS", "AF", "OC", "SA"],
+          "enumDescriptions": [
+            "North America",
+            "Europe",
+            "Asia",
+            "Africa",
+            "Oceania",
+            "South America"
+          ],
+          "description": "Default region for quick dev verification"
+        },
+        "uprockVerify.timeout": {
+          "type": "number",
+          "default": 180000,
+          "minimum": 30000,
+          "maximum": 600000,
+          "description": "Request timeout in milliseconds (default: 180000 = 3 minutes)"
+        },
+        "uprockVerify.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notification popups for verification results"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "uprock.verify",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "uprock.verifyDev",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint src --ext js",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@vscode/test-electron": "^2.3.0",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.50.0"
+  }
+}
