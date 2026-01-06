@@ -2,7 +2,23 @@
 
 MCP (Model Context Protocol) server for UpRock Verify - verify website reachability and performance across 6 continents.
 
-## Quick Install (Recommended)
+## One-Line Install
+
+Install and configure everything with a single command:
+
+```bash
+# Install globally and set up your API key (replace with your actual key)
+npm install -g uprock-verify-mcp && echo 'export UPROCK_API_KEY="your-api-key"' >> ~/.zshrc && source ~/.zshrc
+```
+
+Or copy this for **bash** users:
+```bash
+npm install -g uprock-verify-mcp && echo 'export UPROCK_API_KEY="your-api-key"' >> ~/.bashrc && source ~/.bashrc
+```
+
+That's it! The MCP server will automatically work with all supported IDEs.
+
+## Quick Install for Specific Clients
 
 Install automatically for your preferred client:
 
