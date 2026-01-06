@@ -55,9 +55,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "uprock-verify": {
       "command": "npx",
-      "args": ["uprock-verify-mcp"],
+      "args": ["-y", "uprock-verify-mcp"],
       "env": {
-        "UPROCK_API_KEY": "your-api-key"
+        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
       }
     }
   }
@@ -73,9 +73,9 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
   "mcpServers": {
     "uprock-verify": {
       "command": "npx",
-      "args": ["uprock-verify-mcp"],
+      "args": ["-y", "uprock-verify-mcp"],
       "env": {
-        "UPROCK_API_KEY": "your-api-key"
+        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
       }
     }
   }
@@ -91,9 +91,9 @@ Add to Cursor's MCP settings (Settings → MCP):
   "mcpServers": {
     "uprock-verify": {
       "command": "npx",
-      "args": ["uprock-verify-mcp"],
+      "args": ["-y", "uprock-verify-mcp"],
       "env": {
-        "UPROCK_API_KEY": "your-api-key"
+        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
       }
     }
   }
@@ -107,9 +107,9 @@ For any MCP-compatible AI assistant, use:
 ```json
 {
   "command": "npx",
-  "args": ["uprock-verify-mcp"],
+  "args": ["-y", "uprock-verify-mcp"],
   "env": {
-    "UPROCK_API_KEY": "your-api-key"
+    "UPROCK_API_KEY": "${UPROCK_API_KEY}"
   }
 }
 ```

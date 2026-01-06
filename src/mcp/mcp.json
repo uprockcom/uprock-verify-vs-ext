@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "uprock-verify-mcp"],
       "env": {
-        "UPROCK_API_KEY": ""
+        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
       }
     }
   }
