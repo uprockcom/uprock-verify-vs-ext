@@ -29,7 +29,34 @@ const API_BASE_URL = process.env.UPROCK_API_URL || 'https://768q7f2qhge7.share.z
 const EXTENSION_VERSION = '1.0.0';
 
 /**
- * Get API key from secure config file or environment variable
+ * Parse shell profile file to extract UPROCK_API_KEY
+ */
+function parseShellProfile(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) {
+      return null;
+    }
+    const content = fs.readFileSync(filePath, 'utf8');
+    // Match: export UPROCK_API_KEY="value" or export UPROCK_API_KEY='value' or export UPROCK_API_KEY=value
+    const patterns = [
+      /export\s+UPROCK_API_KEY\s*=\s*"([^"]+)"/,
+      /export\s+UPROCK_API_KEY\s*=\s*'([^']+)'/,
+      /export\s+UPROCK_API_KEY\s*=\s*([^\s\n]+)/
+    ];
+    for (const pattern of patterns) {
+      const match = content.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+  } catch (e) {
+    // File unreadable
+  }
+  return null;
+}
+
+/**
+ * Get API key from environment variable, shell profiles, or config file
  */
 function getApiKey() {
   // First check environment variable
@@ -37,9 +64,25 @@ function getApiKey() {
     return process.env.UPROCK_API_KEY;
   }
 
-  // Then check secure config file
   const homeDir = process.env.HOME || process.env.USERPROFILE;
   if (homeDir) {
+    // Check shell profile files (for GUI apps that don't inherit shell env)
+    const shellProfiles = [
+      path.join(homeDir, '.zshrc'),
+      path.join(homeDir, '.bashrc'),
+      path.join(homeDir, '.bash_profile'),
+      path.join(homeDir, '.profile'),
+      path.join(homeDir, '.zshenv')
+    ];
+
+    for (const profile of shellProfiles) {
+      const apiKey = parseShellProfile(profile);
+      if (apiKey) {
+        return apiKey;
+      }
+    }
+
+    // Then check secure config file
     const configFile = path.join(homeDir, '.uprock-verify', 'config.json');
     if (fs.existsSync(configFile)) {
       try {
