@@ -1,0 +1,58 @@
+{
+  "name": "uprock-verify-mcp",
+  "version": "1.0.5",
+  "description": "MCP server for UpRock Verify - verify website reachability and performance across 6 continents",
+  "author": "UpRock",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uprock/uprock-verify-vscode.git"
+  },
+  "homepage": "https://github.com/uprock/uprock-verify-vscode#mcp-server",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "uprock",
+    "verify",
+    "website",
+    "monitoring",
+    "performance",
+    "reachability",
+    "claude",
+    "ai-assistant",
+    "windsurf",
+    "cursor",
+    "vscode"
+  ],
+  "main": "index.js",
+  "bin": {
+    "uprock-verify-mcp": "index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "mcp.json"
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "mcp": {
+    "name": "uprock-verify",
+    "description": "Verify website reachability and performance across 6 continents",
+    "command": "npx",
+    "args": [
+      "-y",
+      "uprock-verify-mcp"
+    ],
+    "env": {
+      "UPROCK_API_KEY": ""
+    }
+  }
+}

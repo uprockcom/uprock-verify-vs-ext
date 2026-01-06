@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "uprock-verify": {
+      "command": "npx",
+      "args": ["-y", "uprock-verify-mcp"],
+      "env": {
+        "UPROCK_API_KEY": ""
+      }
+    }
+  }
+}
