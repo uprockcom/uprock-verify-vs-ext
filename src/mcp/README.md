@@ -28,21 +28,21 @@ npm install -g uprock-verify-mcp
 
 ## Configuration
 
-### API Key
+### API Key Setup (One-Time)
 
-Set your UpRock Verify API key using one of these methods:
+Add your UpRock Verify API key to your shell profile (`~/.zshrc`, `~/.bashrc`, etc.):
 
-1. **Environment variable** (recommended):
-   ```bash
-   export UPROCK_API_KEY=your-api-key
-   ```
+```bash
+echo 'export UPROCK_API_KEY="your-api-key"' >> ~/.zshrc
+source ~/.zshrc
+```
 
-2. **Config file**: Create `~/.uprock-verify/config.json`:
-   ```json
-   {
-     "apiKey": "your-api-key"
-   }
-   ```
+The MCP server **automatically reads** your API key from shell profiles - no manual configuration needed in each IDE!
+
+**Supported locations** (checked in order):
+1. Environment variable `UPROCK_API_KEY`
+2. Shell profiles: `~/.zshrc`, `~/.bashrc`, `~/.bash_profile`, `~/.profile`, `~/.zshenv`
+3. Config file: `~/.uprock-verify/config.json`
 
 ## IDE & Chat Integration
 
@@ -55,10 +55,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "uprock-verify": {
       "command": "npx",
-      "args": ["-y", "uprock-verify-mcp"],
-      "env": {
-        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
-      }
+      "args": ["-y", "uprock-verify-mcp"]
     }
   }
 }
@@ -71,12 +68,9 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
 ```json
 {
   "mcpServers": {
-    "uprock-verify": {
+    "uprock-verify-mcp": {
       "command": "npx",
-      "args": ["-y", "uprock-verify-mcp"],
-      "env": {
-        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
-      }
+      "args": ["-y", "uprock-verify-mcp"]
     }
   }
 }
@@ -91,10 +85,7 @@ Add to Cursor's MCP settings (Settings → MCP):
   "mcpServers": {
     "uprock-verify": {
       "command": "npx",
-      "args": ["-y", "uprock-verify-mcp"],
-      "env": {
-        "UPROCK_API_KEY": "${UPROCK_API_KEY}"
-      }
+      "args": ["-y", "uprock-verify-mcp"]
     }
   }
 }
@@ -107,12 +98,11 @@ For any MCP-compatible AI assistant, use:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "uprock-verify-mcp"],
-  "env": {
-    "UPROCK_API_KEY": "${UPROCK_API_KEY}"
-  }
+  "args": ["-y", "uprock-verify-mcp"]
 }
 ```
+
+> **Note:** No `env` section needed - the server automatically reads your API key from shell profiles.
 
 ## Available Tools
 

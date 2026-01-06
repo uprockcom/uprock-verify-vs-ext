@@ -1,6 +1,6 @@
 {
   "name": "uprock-verify-mcp",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MCP server for UpRock Verify - verify website reachability and performance across 6 continents",
   "author": "UpRock",
   "license": "MIT",
